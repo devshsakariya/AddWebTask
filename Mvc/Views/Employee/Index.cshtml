@@ -1,0 +1,148 @@
+﻿@model IEnumerable<UserManagement.Data.Models.User>
+
+@{
+    ViewBag.Title = "Index";
+}
+<br />
+
+<p>
+    <a href="@Url.Action("AddOrEdit","Employee")" class="btn btn-default"><i class="fa fa-plus"></i> Create New</a>
+    <input type="text" id="search" name="search" style="color:black">
+</p>
+
+<table class="table table-striped">
+    <thead class="table-heading">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BirthDate)
+            </th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BirthDate)
+            </td>
+            <td>
+                <a href="@Url.Action("AddOrEdit", "Employee", new { id = item.Id})" class="btn btn-default"><i class="fa fa-pencil"></i>  Edit</a>
+                <a onclick="Delete(' + @item.Id + ')" class="btn btn-default"><i class="fa fa-trash"></i>  Delete</a>
+            </td>
+        </tr>
+    }
+
+</table>
+
+
+@section scripts{
+
+    <script src="~/Scripts/ASPSnippets_Pager.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            GetCustomers(1);
+        });
+        $("body").on("click", ".Pager .page", function () {
+            GetCustomers(parseInt($(this).attr('page')));
+        });
+        function GetCustomers(pageIndex) {
+            $.ajax({
+                type: "POST",
+                url: "/Home/AjaxMethod",
+                data: '{pageIndex: ' + pageIndex + '}',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: OnSuccess,
+                failure: function (response) {
+                    alert(response.d);
+                },
+                error: function (response) {
+                    alert(response.d);
+                }
+            });
+        };
+        function OnSuccess(response) {
+            var model = response;
+            var row = $("#tblCustomers tr:last-child").removeAttr("style").clone(true);
+            $("#tblCustomers tr").not($("#tblCustomers tr:first-child")).remove();
+            $.each(model.Customers, function () {
+                var customer = this;
+                $("td", row).eq(0).html(customer.CustomerID);
+                $("td", row).eq(1).html(customer.ContactName);
+                $("td", row).eq(2).html(customer.City);
+                $("td", row).eq(3).html(customer.Country);
+                $("#tblCustomers").append(row);
+                row = $("#tblCustomers tr:last-child").clone(true);
+            });
+            $(".Pager").ASPSnippets_Pager({
+                ActiveCssClass: "current",
+                PagerCssClass: "pager",
+                PageIndex: model.PageIndex,
+                PageSize: model.PageSize,
+                RecordCount: model.RecordCount
+            });
+        };
+    </script>
+
+    <script>
+        //setup before functions
+        var typingTimer;                //timer identifier
+        var doneTypingInterval = 500;  //time in ms, 5 second for example
+        var $input = $('#search');
+
+        //on keyup, start the countdown
+        $input.on('keyup', function () {
+            clearTimeout(typingTimer);
+            typingTimer = setTimeout(doneTyping, doneTypingInterval);
+        });
+
+        //on keydown, clear the countdown
+        $input.on('keydown', function () {
+            clearTimeout(typingTimer);
+        });
+
+        //user is "finished typing," do something
+        function doneTyping() {
+           //Ajax code for searching or filter
+        }
+
+        $(function () {
+            var successMessage = '@TempData["SuccessMessage"]'
+            if (successMessage != '')
+                alertify.success(successMessage);
+        });
+
+        function Delete(Id) {
+            alertify.confirm('Web Api CRUD Operations', 'Are You Sure to Delete this Record ?' + Id, function () {
+                 var link = Id;
+                 link = link.replace("+", "").replace("+", "");
+                window.location.href = '@Url.Action("Delete","Employee")/' + link;
+            },null );
+        }
+    </script>
+}

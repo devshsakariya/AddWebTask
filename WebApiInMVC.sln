@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31727.386
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi", "WebApi\WebApi.csproj", "{D2EAA83E-471A-4FE0-AD31-F5C6E4860146}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mvc", "Mvc\Mvc.csproj", "{34ABE0AC-CA7A-4965-841F-5D4A60D06FB7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserManagement.Data", "UserManagement.Data\UserManagement.Data.csproj", "{BDAAECC1-9B69-47F1-9903-15FFBEAB348F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D2EAA83E-471A-4FE0-AD31-F5C6E4860146}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D2EAA83E-471A-4FE0-AD31-F5C6E4860146}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D2EAA83E-471A-4FE0-AD31-F5C6E4860146}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D2EAA83E-471A-4FE0-AD31-F5C6E4860146}.Release|Any CPU.Build.0 = Release|Any CPU
+		{34ABE0AC-CA7A-4965-841F-5D4A60D06FB7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34ABE0AC-CA7A-4965-841F-5D4A60D06FB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34ABE0AC-CA7A-4965-841F-5D4A60D06FB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34ABE0AC-CA7A-4965-841F-5D4A60D06FB7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BDAAECC1-9B69-47F1-9903-15FFBEAB348F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BDAAECC1-9B69-47F1-9903-15FFBEAB348F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BDAAECC1-9B69-47F1-9903-15FFBEAB348F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BDAAECC1-9B69-47F1-9903-15FFBEAB348F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C36F01FD-1A70-40FC-A287-9047504FA0FE}
+	EndGlobalSection
+EndGlobal
